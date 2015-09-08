@@ -1,7 +1,21 @@
 #! /bin/bash
 
+# To config properly, replace all [fields] below.
+
 # Enter the directory with source control (SVN).
 cd "[PROJECT DIRECTORY]/[YOUR NETID]/hw00"
+
+# Request score from leaderboard, decimal point ignored
+SCORE=$(curl -silent "http://www.cs.cornell.edu/Courses/cs4780/2015fa/leaderboard/hw00/hw00.html" | grep -m 1 -A 2 "[YOUR TEAM NAME]" | tail -1 | grep -o '[0-9]' | xargs | sed -e 's/ //g')
+
+# The score you want to reach (greater or equal).
+THRESHOLD=36500
+
+# Compare and abort if threshold met.
+if [ $SCORE -ge $THRESHOLD ]; then
+  echo "boom! no longer need to submit!"
+  exit 1
+fi
 
 # Following is example for project 00, innerproduct.m
 
